@@ -32,14 +32,14 @@ THEN I can save my initials and my score
 
 ## Table of Contents
 
-- [Link to deployed website](#Link-to-deployed-website)
+- [Link to deployed website](#link-to-deployed-website)
 - [Usage](#usage)
+- [Technologies Used](#technologies-used)
 - [Credits](#credits)
-- [Technologies Used](#Technologies-Used)
 
 ## Link-to-deployed-website
 
-[Click here to go to the deployed website.](https://ckim812.github.io/Code-Quiz/)
+[https://ckim812.github.io/Code-Quiz/](https://ckim812.github.io/Code-Quiz/)
 
 ## Usage
 
@@ -47,9 +47,9 @@ THEN I can save my initials and my score
 Directions on how to use the application.
 ```
 
-![alt text](./Password%20Generator%20Preview.png)
+![alt text](./assets/img/04-web-apis-homework-demo.gif)
 
-## Technologies Used
+## Technologies-Used
 
 ```
 HTML, CSS, JS
