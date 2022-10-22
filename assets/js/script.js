@@ -4,6 +4,7 @@ let clockId;
 let qI = 0;
 let score = 0;
 let quizDone = false;
+let player = "";
 var allHighScores = [];
 const questionArea = document.querySelector("#question-area");
 const questionTitle = document.querySelector("#question-title");
@@ -56,11 +57,13 @@ const handleAnswer = (correct, choice) => {
     }
     qI++;
     if (qI < questions.length) showQuestion();
-  } else if (qI == questions.length) {
-    console.log("else triggered");
-    quizDone = true;
-    clearInterval(clockId);
-    displayHighScores();
+    if (qI == questions.length) {
+      console.log("else triggered");
+      quizDone = true;
+      clearInterval(clockId);
+      player = prompt("Please enter your name:");
+      displayHighScores();
+    }
   }
   console.log("after if statement", qI);
   document.querySelector("#user-score").innerHTML = score;
@@ -75,19 +78,26 @@ const displayHighScores = () => {
   scoreBox.style.display = "none";
   timerBox.style.display = "none";
   highScoresBox.style.display = "none";
-  let player = prompt("Please enter your name:");
   questionTitle.textContent = "High Scores";
+
   const highScore = [player, score, time];
   if (allHighScores.length === 0) {
-    questionText.textContent = highScore;
     allHighScores = highScore;
   } else {
     var currentHighScores = localStorage.getItem("allHighScores");
-    allHighScores = currentHighScores.concat(currentHighScores);
-    questionText.textContent = allHighScores;
+    allHighScores = currentHighScores.concat(highScore);
   }
   localStorage.setItem("allHighScores", allHighScores);
   restartBtn.style.display = "inline";
+  console.log(allHighScores);
+  console.log(typeof allHighScores);
+  console.log(allHighScores.length);
+
+  questionText.innerHTML = "";
+  for (let i = 0; i < allHighScores.length; i++) {
+    console.log(allHighScores[i]);
+    questionText.textContent += allHighScores[i];
+  }
 };
 
 const showQuestion = () => {
@@ -124,8 +134,10 @@ const restart = () => {
   timerBox.style.display = "block";
   highScoresBox.style.display = "block";
   time = 60;
-  qI = 0;
   quizRun = true;
+  clockId;
+  qI = 0;
+  score = 0;
   quizDone = false;
   document.querySelector(".timer-count").innerHTML = time;
 };

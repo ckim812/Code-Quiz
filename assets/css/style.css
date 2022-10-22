@@ -16,11 +16,14 @@ body {
 }
 
 header {
+  display: flex;
   padding: 40px;
   text-align: center;
   background: #13293d;
   color: #fff;
   border-bottom: 30px #879274;
+  align-items: center;
+  flex-direction: column;
 }
 
 main {
@@ -50,11 +53,8 @@ footer {
   max-width: 255px;
   padding: 20px 52px;
   text-align: center;
-  transition-duration: 0.15s;
-  transition-property: background-color;
-  transition-timing-function: linear;
   margin-top: 0.6em;
-  font-weight: 500;
+  font-weight: 900;
 }
 
 .content {
@@ -65,26 +65,26 @@ footer {
 
 .timer-box {
   width: fit-content;
-  background: white;
   background: lightgreen;
   border-radius: 8px;
   color: #13293d;
-  cursor: pointer;
   font-size: 20px;
   letter-spacing: 0.21px;
   line-height: 16px;
-  /* max-width: 255px; */
+  max-width: 255px;
   padding: 20px 52px;
   text-align: center;
-  transition-duration: 0.15s;
-  transition-property: background-color;
-  transition-timing-function: linear;
   margin-top: 0.6em;
-  font-weight: 500;
+  font-weight: 700;
+}
+
+.timer-text {
+  translate: 0px -37px;
+  color: aquamarine;
 }
 
 .large-font {
-  font-size: 3.5em;
+  font-size: 50px;
   text-align: center;
 }
 
