@@ -3,7 +3,7 @@
 ## Description
 
 ```
-The goal of this project is to create a timed coding quiz with multiple-choice questions.
+The goal of this project is to create a timed coding quiz with multiple-choice questions. With each incorrect answer, you will lose time. After completing the quiz, the user may save their name and score. The high score list should be able to be accessed at any time during the app as well as saving the data even after restarting the quiz.
 ```
 
 ## User Story
@@ -44,10 +44,12 @@ THEN I can save my initials and my score
 ## Usage
 
 ```
-Directions on how to use the application.
+Press the "Take Quiz" button to begin the quiz. Answer each question by pressing one of the 4 options per question. If your answer choice is correct, a point will be added, which will be indicated on the bottom right. If your answer choice is incorrect, you will lose 10 seconds off the remaining seconds left. If the timer runs down to 0, your quiz will end and you will be taken to the high scores list. You may restart by pressing the restart button when your quiz is over.
+
+At any point of the quiz, you may press the "High Scores" button to access the current high scores for this quiz.
 ```
 
-![alt text](./assets/img/04-web-apis-homework-demo.gif)
+![alt text](./assets/img/Code%20Quiz%20Preview.png)
 
 ## Technologies-Used
 
