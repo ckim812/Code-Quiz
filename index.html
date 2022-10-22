@@ -9,26 +9,47 @@
     <link rel="stylesheet" href="./assets/css/style.css" />
   </head>
   <body>
-    <header>
+    <header class="header">
       <h1>Code Quiz</h1>
-<!-- timer (time left) -->
-<!-- view high scores link -->
+      <div class="timer-box">
+        <div class="timer-text"></div>
+        <div class="large-font timer-count">60</div>
+      </div>
+      <div>view high scores link here</div>
     </header>
-    <main>
-<!-- heading "Coding Quiz Challenge" -->
-<!-- p tag "instructions" -->
-<!-- "start quiz" button -->
-<div>
-  <button id="takeQuiz" class="btn">Take Quiz</button>
-</div>
-<!-- Question box -->
-<!-- Question choices (1,2,3,4) -->
-<!-- spacer then "correct or incorrect" message in gray underneath questions -->
-
-</main>
-<footer>
-  
-</footer>
-<script src="script.js"></script>
+    <main class="main">
+      <!-- "instructions" -->
+      <div class="content" id="info">
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum."
+      </div>
+      <!-- "start quiz" button -->
+      <div class="controls">
+        <button class="btn" id="takeQuiz">Take Quiz</button>
+        <button class="btn" id="submit">Submit</button>
+        <button class="btn" id="restart">Restart</button>
+      </div>
+      <div class="content" id="question-area">
+        <div id="question-title"></div>
+        <div id="question-text"></div>
+        <div id="answer-choices"></div>
+      </div>
+    </main>
+    <footer>
+      <div class="score-box">
+        <div class="score">
+          <span id="user-score">0</span>
+          <span> / </span>
+          <span id="total-score">0</span>
+        </div>
+      </div>
+    </footer>
+    <script src="./assets/js/questions.js"></script>
+    <script src="./assets/js/script.js"></script>
   </body>
 </html>
