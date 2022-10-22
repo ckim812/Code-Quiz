@@ -18,6 +18,7 @@ const timerBox = document.getElementById("timerBox");
 const highScoresBox = document.getElementById("highScoresBox");
 
 const init = () => {
+  qI = 0;
   restartBtn.style.display = "none";
   questionArea.style.display = "none";
   message.style.display = "none";
@@ -31,39 +32,41 @@ const init = () => {
 const clock = () => {
   time--;
   if (time < 1) {
+    quizDone = true;
     clearInterval(clockId);
     time = 0;
+    displayHighScores();
   }
   if (!quizDone) document.querySelector(".timer-count").innerHTML = time;
 };
 
 const handleAnswer = (correct, choice) => {
+  console.log("before if statement", qI);
   if (qI < questions.length) {
+    console.log("if triggered");
     if (choice == correct) {
       console.log("Correct!");
       message.innerHTML = "<h2>Correct! (+1 score)</h2>";
       score++;
+      document.querySelector("#user-score").innerHTML = score;
     } else {
       console.log("Incorrect!");
       message.innerHTML = "<h2>Incorrect! (-10 sec)</h2>";
       time = time - 10;
     }
     qI++;
-    document.querySelector("#user-score").innerHTML = score;
-    showQuestion();
-    quizDone = false;
-  } else {
+    if (qI < questions.length) showQuestion();
+  } else if (qI == questions.length) {
+    console.log("else triggered");
     quizDone = true;
     clearInterval(clockId);
-    message.style.display = "none";
-    scoreBox.style.display = "none";
     displayHighScores();
   }
-  //   if (quizDone)
+  console.log("after if statement", qI);
+  document.querySelector("#user-score").innerHTML = score;
 };
 
 const displayHighScores = () => {
-  quizDone = true;
   takeQuizBtn.style.display = "none";
   info.style.display = "none";
   questionArea.style.display = "inline";
@@ -79,7 +82,7 @@ const displayHighScores = () => {
     questionText.textContent = highScore;
     allHighScores = highScore;
   } else {
-    const currentHighScores = localStorage.getItem("allHighScores");
+    var currentHighScores = localStorage.getItem("allHighScores");
     allHighScores = currentHighScores.concat(currentHighScores);
     questionText.textContent = allHighScores;
   }
@@ -103,6 +106,7 @@ const takeQuiz = () => {
   takeQuizBtn.style.display = "none";
   info.style.display = "none";
   questionArea.style.display = "inline";
+  answerChoices.style.display = "inline";
   message.style.display = "inline";
   scoreBox.style.display = "inline";
   showQuestion();
@@ -114,12 +118,16 @@ const restart = () => {
   questionArea.style.display = "none";
   message.style.display = "none";
   scoreBox.style.display = "none";
-  quizDone = false;
   takeQuizBtn.style.display = "inline";
   info.style.display = "inline";
   answerChoices.style.display = "none";
   timerBox.style.display = "block";
   highScoresBox.style.display = "block";
-}
+  time = 60;
+  qI = 0;
+  quizRun = true;
+  quizDone = false;
+  document.querySelector(".timer-count").innerHTML = time;
+};
 
 init();
