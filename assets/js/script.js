@@ -1,4 +1,4 @@
-let time = 60;
+let timeLeft = 60;
 let quizRun = true;
 let clockId;
 let qI = 0;
@@ -17,6 +17,7 @@ const scoreBox = document.querySelector("#scoreBox");
 const info = document.getElementById("info");
 const timerBox = document.getElementById("timerBox");
 const highScoresBox = document.getElementById("highScoresBox");
+const highScoresArea = document.getElementById("highScores-area");
 
 const init = () => {
   qI = 0;
@@ -28,21 +29,21 @@ const init = () => {
   takeQuizBtn.addEventListener("click", takeQuiz);
   highScoresBox.addEventListener("click", displayHighScores);
   restartBtn.addEventListener("click", restart);
+  localStorage.setItem("allHighScores", []);
 };
 
 const clock = () => {
-  time--;
-  if (time < 1) {
+  timeLeft--;
+  if (timeLeft < 1) {
     quizDone = true;
     clearInterval(clockId);
-    time = 0;
+    timeLeft = 0;
     displayHighScores();
   }
-  if (!quizDone) document.querySelector(".timer-count").innerHTML = time;
+  if (!quizDone) document.querySelector(".timer-count").innerHTML = timeLeft;
 };
 
 const handleAnswer = (correct, choice) => {
-  console.log("before if statement", qI);
   if (qI < questions.length) {
     console.log("if triggered");
     if (choice == correct) {
@@ -53,55 +54,73 @@ const handleAnswer = (correct, choice) => {
     } else {
       console.log("Incorrect!");
       message.innerHTML = "<h2>Incorrect! (-10 sec)</h2>";
-      time = time - 10;
+      timeLeft = timeLeft - 10;
     }
-    qI++;
-    if (qI < questions.length) showQuestion();
-    if (qI == questions.length) {
-      console.log("else triggered");
-      quizDone = true;
-      clearInterval(clockId);
-      player = prompt("Please enter your name:");
-      displayHighScores();
-    }
+    console.log("before show question", qI);
+    console.log("question Length", questions.length);
+    showQuestion();
+  }
+  qI++;
+  if (qI > questions.length) {
+    console.log("WIN triggered");
+    quizDone = true;
+    clearInterval(clockId);
+    player = prompt("Please enter your name:");
+    const highScore = { name: player, score: score, timeLeft: timeLeft };
+    displayHighScores(highScore);
   }
   console.log("after if statement", qI);
   document.querySelector("#user-score").innerHTML = score;
 };
 
-const displayHighScores = () => {
+const displayHighScores = (playerScore) => {
   takeQuizBtn.style.display = "none";
   info.style.display = "none";
-  questionArea.style.display = "inline";
-  answerChoices.style.display = "none";
+  questionArea.style.display = "none";
   message.style.display = "none";
   scoreBox.style.display = "none";
   timerBox.style.display = "none";
   highScoresBox.style.display = "none";
+  highScoresArea.style.display = "inline";
+  restartBtn.style.display = "inline";
   questionTitle.textContent = "High Scores";
 
-  const highScore = [player, score, time];
-  if (allHighScores.length === 0) {
-    allHighScores = highScore;
-  } else {
-    var currentHighScores = localStorage.getItem("allHighScores");
-    allHighScores = currentHighScores.concat(highScore);
+  const currentHighScoresRaw = localStorage.getItem("allHighScores");
+  let currentHighScores = currentHighScoresRaw
+    ? JSON.parse(currentHighScoresRaw)
+    : [];
+  if (playerScore) {
+    currentHighScores.push(playerScore);
+    let currentHighScoresString = JSON.stringify(currentHighScores);
+    localStorage.setItem("allHighScores", currentHighScoresString);
   }
-  localStorage.setItem("allHighScores", allHighScores);
-  restartBtn.style.display = "inline";
+
   console.log(allHighScores);
   console.log(typeof allHighScores);
   console.log(allHighScores.length);
 
-  questionText.innerHTML = "";
-  for (let i = 0; i < allHighScores.length; i++) {
-    console.log(allHighScores[i]);
-    questionText.textContent += allHighScores[i];
+  const highScoresList = document.getElementById("highScores-list");
+
+  while (highScoresList.firstChild) {
+    highScoresList.removeChild(highScoresList.firstChild);
+  }
+
+  for (let i = 0; i < currentHighScores.length; i++) {
+    console.log(currentHighScores[i]);
+    let scoreItem = document.createElement("li");
+    scoreItem.setAttribute("id", "scores-list");
+    scoreItem.innerHTML =
+      currentHighScores[i].name +
+      ", " +
+      currentHighScores[i].score +
+      ", " +
+      currentHighScores[i].timeLeft;
+    highScoresList.appendChild(scoreItem);
   }
 };
 
 const showQuestion = () => {
-  let { N, Q, A, C } = questions[qI];
+  let { N, Q, A, C } = questions[qI]; //destructuring questions array
   questionTitle.innerHTML = `<h1>${N}</h1>`;
   questionText.innerHTML = `<h2>${Q}</h2>`;
   answerChoices.innerHTML = "";
@@ -133,13 +152,13 @@ const restart = () => {
   answerChoices.style.display = "none";
   timerBox.style.display = "block";
   highScoresBox.style.display = "block";
-  time = 60;
+  timeLeft = 60;
   quizRun = true;
   clockId;
   qI = 0;
   score = 0;
   quizDone = false;
-  document.querySelector(".timer-count").innerHTML = time;
+  document.querySelector(".timer-count").innerHTML = timeLeft;
 };
 
 init();
