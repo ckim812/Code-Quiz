@@ -12,6 +12,7 @@ const questionText = document.querySelector("#question-text");
 const answerChoices = document.querySelector("#answer-choices");
 const takeQuizBtn = document.querySelector("#takeQuiz");
 const restartBtn = document.querySelector("#restart");
+const clearHighScoresBtn = document.querySelector("#clearHighScores");
 const message = document.querySelector("#message");
 const scoreBox = document.querySelector("#scoreBox");
 const info = document.getElementById("info");
@@ -21,6 +22,7 @@ const highScoresArea = document.getElementById("highScores-area");
 
 const init = () => {
   restartBtn.style.display = "none";
+  clearHighScoresBtn.style.display = "none";
   questionArea.style.display = "none";
   highScoresArea.style.display = "none";
   message.style.display = "none";
@@ -29,6 +31,7 @@ const init = () => {
   takeQuizBtn.addEventListener("click", takeQuiz);
   highScoresBox.addEventListener("click", displayHighScores);
   restartBtn.addEventListener("click", restart);
+  clearHighScoresBtn.addEventListener("click", clearHighScores);
   localStorage.setItem("allHighScores", []);
 };
 
@@ -78,6 +81,7 @@ const displayHighScores = (playerScore) => {
   highScoresArea.style.display = "inline";
   highScoresList.style.display = "inline";
   restartBtn.style.display = "inline";
+  clearHighScoresBtn.style.display = "inline";
 
   clearInterval(clockId);
 
@@ -120,6 +124,11 @@ const displayHighScores = (playerScore) => {
   }
 };
 
+const clearHighScores = () => {
+    localStorage.setItem("allHighScores", allHighScores);
+    restart();
+};
+
 const showQuestion = () => {
   let { qNumber, qText, qAnswerChoices, qCorrectChoice } =
     questions[questionIndex]; //destructuring questions array
@@ -146,6 +155,7 @@ const takeQuiz = () => {
 
 const restart = () => {
   restartBtn.style.display = "none";
+  clearHighScoresBtn.style.display = "none";
   questionArea.style.display = "none";
   highScoresArea.style.display = "none";
   message.style.display = "none";

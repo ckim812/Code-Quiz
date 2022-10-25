@@ -44,7 +44,7 @@ THEN I can save my initials and my score
 ## Usage
 
 ```
-Press the "Take Quiz" button to begin the quiz. Answer each question by pressing one of the 4 options per question. If your answer choice is correct, a point will be added, which will be indicated on the bottom right. If your answer choice is incorrect, you will lose 10 seconds off the remaining seconds left. If the timer runs down to 0, your quiz will end and you will be taken to the high scores list. You may restart by pressing the restart button when your quiz is over.
+Press the "Take Quiz" button to begin the quiz. Answer each question by pressing one of the 4 options per question. If your answer choice is correct, a point will be added, which will be indicated on the bottom right. If your answer choice is incorrect, you will lose 10 seconds off the remaining seconds left. If the timer runs down to 0, your quiz will end and you will be taken to the high scores list. You may restart by pressing the restart button or the clear high scores button when your quiz is over. The restart button will save your scores while the clear high scores button will clear all stored high scores.
 
 At any point of the quiz, you may press the "High Scores" button to access the current high scores for this quiz.
 ```
