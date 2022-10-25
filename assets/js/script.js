@@ -58,8 +58,7 @@ const handleAnswer = (correct, choice) => {
   if (questionIndex < questions.length) showQuestion();
   if (questionIndex == questions.length) {
     quizDone = true;
-    clearInterval(clockId);
-    document.querySelector("#user-score").innerHTML = score;
+        document.querySelector("#user-score").innerHTML = score;
     player = prompt("Please enter your name or initials:");
     const highScore = { name: player, score: score, timeLeft: timeLeft };
     displayHighScores(highScore);
@@ -79,6 +78,9 @@ const displayHighScores = (playerScore) => {
   highScoresArea.style.display = "inline";
   highScoresList.style.display = "inline";
   restartBtn.style.display = "inline";
+
+  clearInterval(clockId);
+
   document.getElementById("highScores-title").innerHTML =
     "<h1>High Scores</h1>";
   document.getElementById("highScores-title").style.color = "gray";
