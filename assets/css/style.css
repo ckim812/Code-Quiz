@@ -58,9 +58,11 @@ footer {
 }
 
 .content {
-  width: 50%;
+  width: fit-content;
   background: white;
-  height: fit-content;
+  margin: 60px;
+  border-radius: 8px;
+    border: 5px solid dimgray;
 }
 
 .timer-box {
@@ -147,4 +149,10 @@ footer {
   padding: 0 35px;
   font-size: 18px;
   font-weight: 300;
+}
+#info-text {
+  padding: 0 35px;
+  font-size: 18px;
+  font-weight: 500;
+  background-color:aliceblue;
 }
