@@ -1,32 +1,32 @@
 const questions = [
     {
-        N: 'Question 1',
-        Q: 'Question 1 text',
-        A: ['a','b','c','d'],
-        C: 'c'
+        qNumber: 'Question 1',
+        qText: 'What type of variable is apple?  var apple = " Fuji "',
+        qAnswerChoices: ['string','boolean','array','number'],
+        qCorrectChoice: 'string'
     },
     {
-        N: 'Question 2',
-        Q: 'Question 2 text',
-        A: ['2a','2b','c','2d'],
-        C: 'c'
+        qNumber: 'Question 2',
+        qText: 'What type of variable is quantites?  var quantities = [2, 4, 10, 1]',
+        qAnswerChoices: ['string','boolean','array','number'],
+        qCorrectChoice: 'array'
     },
     {
-        N: 'Question 3',
-        Q: 'Question 3 text',
-        A: ['3a','b','c','d'],
-        C: 'c'
+        qNumber: 'Question 3',
+        qText: 'What is first index value of an array?',
+        qAnswerChoices: ['2','-1','0','1'],
+        qCorrectChoice: '0'
     },
     {
-        N: 'Question 4',
-        Q: 'Question 4 text',
-        A: ['4a','b','c','d'],
-        C: 'c'
+        qNumber: 'Question 4',
+        qText: 'What is the correct syntax to transform a string to upper case?  var txt = "Hello!";',
+        qAnswerChoices: ['toUpperCase( txt );','toUpperCase.txt();','txt.toUpperCase();','txt(toUpperCase);'],
+        qCorrectChoice: 'txt.toUpperCase();'
     },
     {
-        N: 'Question 5',
-        Q: 'Question 5 text',
-        A: ['5a','b','c','d'],
-        C: 'c'
+        qNumber: 'Question 5',
+        qText: 'Which of these methods removes the last element of an array?',
+        qAnswerChoices: ['pop()','splice()','push()','split()'],
+        qCorrectChoice: 'pop()'
     },
 ]

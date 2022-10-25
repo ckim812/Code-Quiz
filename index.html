@@ -11,6 +11,7 @@
   <body>
     <header class="header">
       <h1>Code Quiz</h1>
+      <!-- Timer Box -->
       <div class="timer-box" id="timerBox">
         <div class="timer-text">Seconds left:</div>
         <div class="large-font timer-count">60</div>
@@ -18,32 +19,34 @@
       <div class="btn" id="highScoresBox">High Scores</div>
     </header>
     <main class="main">
-      <!-- "instructions" -->
+      <!-- Instructions Box -->
       <div class="content" id="info">
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum."
+        "Try to answer the following code-related questions within the time
+        limit. Keep in mind that incorrect answers will penalize your time left
+        by 10 seconds! Your quiz will end when you finish all the questions or
+        your remaining time runs out. Also, at the end, you may record your
+        name/initials."
       </div>
+      <!-- Questions Box -->
       <div class="content" id="question-area">
         <div id="question-title"></div>
         <div id="question-text"></div>
         <div id="answer-choices"></div>
       </div>
+      <!-- High Scores Box -->
       <div class="content" id="highScores-area">
+        <div id="highScores-title"></div>
         <ol class="content" id="highScores-list"></ol>
       </div>
-      <!-- "start quiz" button -->
       <div class="controls">
         <button class="btn" id="takeQuiz">Take Quiz</button>
         <button class="btn" id="restart">Restart</button>
       </div>
     </main>
     <footer>
+      <!-- Message Box -->
       <div class="score-box" id="message">Quiz Start!</div>
+      <!-- Score Box -->
       <div class="score-box" id="scoreBox">
         <div>
           <span id="user-score">0</span>

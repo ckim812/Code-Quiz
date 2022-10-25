@@ -50,7 +50,7 @@ footer {
   font-size: 20px;
   letter-spacing: 0.21px;
   line-height: 16px;
-  max-width: 255px;
+  max-width: 330px;
   padding: 20px 52px;
   text-align: center;
   margin-top: 0.6em;
@@ -106,6 +106,26 @@ footer {
   transition-timing-function: linear;
   margin-top: 0.6em;
   font-weight: 500;
+}
+
+.bold {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.spacerL {
+  display: inline-block;
+  margin-left: 60px;
+}
+
+.spacerR {
+  display: inline-block;
+  margin-right: 15px;
+}
+
+.highScoreText {
+  font-size: 30px;
+  font-weight: 700;
 }
 
 #question-title {

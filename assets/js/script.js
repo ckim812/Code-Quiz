@@ -1,7 +1,7 @@
 let timeLeft = 60;
 let quizRun = true;
 let clockId;
-let qI = 0;
+let questionIndex = 0;
 let score = 0;
 let quizDone = false;
 let player = "";
@@ -20,9 +20,9 @@ const highScoresBox = document.getElementById("highScoresBox");
 const highScoresArea = document.getElementById("highScores-area");
 
 const init = () => {
-  qI = 0;
   restartBtn.style.display = "none";
   questionArea.style.display = "none";
+  highScoresArea.style.display = "none";
   message.style.display = "none";
   scoreBox.style.display = "none";
   document.querySelector("#total-score").innerHTML = questions.length;
@@ -44,36 +44,31 @@ const clock = () => {
 };
 
 const handleAnswer = (correct, choice) => {
-  if (qI < questions.length) {
-    console.log("if triggered");
+  if (questionIndex < questions.length) {
     if (choice == correct) {
-      console.log("Correct!");
       message.innerHTML = "<h2>Correct! (+1 score)</h2>";
       score++;
       document.querySelector("#user-score").innerHTML = score;
     } else {
-      console.log("Incorrect!");
       message.innerHTML = "<h2>Incorrect! (-10 sec)</h2>";
       timeLeft = timeLeft - 10;
     }
-    console.log("before show question", qI);
-    console.log("question Length", questions.length);
-    showQuestion();
+    questionIndex++;
   }
-  qI++;
-  if (qI > questions.length) {
-    console.log("WIN triggered");
+  if (questionIndex < questions.length) showQuestion();
+  if (questionIndex == questions.length) {
     quizDone = true;
     clearInterval(clockId);
-    player = prompt("Please enter your name:");
+    document.querySelector("#user-score").innerHTML = score;
+    player = prompt("Please enter your name or initials:");
     const highScore = { name: player, score: score, timeLeft: timeLeft };
     displayHighScores(highScore);
   }
-  console.log("after if statement", qI);
   document.querySelector("#user-score").innerHTML = score;
 };
 
 const displayHighScores = (playerScore) => {
+  const highScoresList = document.getElementById("highScores-list");
   takeQuizBtn.style.display = "none";
   info.style.display = "none";
   questionArea.style.display = "none";
@@ -82,50 +77,55 @@ const displayHighScores = (playerScore) => {
   timerBox.style.display = "none";
   highScoresBox.style.display = "none";
   highScoresArea.style.display = "inline";
+  highScoresList.style.display = "inline";
   restartBtn.style.display = "inline";
-  questionTitle.textContent = "High Scores";
+  document.getElementById("highScores-title").innerHTML =
+    "<h1>High Scores</h1>";
+  document.getElementById("highScores-title").style.color = "gray";
 
   const currentHighScoresRaw = localStorage.getItem("allHighScores");
+  //   if currentHighScoresRaw exists, parse it into an array, if not, define it as an empty array
   let currentHighScores = currentHighScoresRaw
     ? JSON.parse(currentHighScoresRaw)
     : [];
-  if (playerScore) {
+
+  // if playerScore exists, push the object into currentHighScores array, then convert it into a string to store it into localStorage under the label "allHighScores"
+  if (quizDone) {
     currentHighScores.push(playerScore);
     let currentHighScoresString = JSON.stringify(currentHighScores);
     localStorage.setItem("allHighScores", currentHighScoresString);
-  }
 
-  console.log(allHighScores);
-  console.log(typeof allHighScores);
-  console.log(allHighScores.length);
+    //   while loop to remove any children currently in highScoresList
+    while (highScoresList.firstChild) {
+      highScoresList.removeChild(highScoresList.firstChild);
+    }
 
-  const highScoresList = document.getElementById("highScores-list");
-
-  while (highScoresList.firstChild) {
-    highScoresList.removeChild(highScoresList.firstChild);
-  }
-
-  for (let i = 0; i < currentHighScores.length; i++) {
-    console.log(currentHighScores[i]);
-    let scoreItem = document.createElement("li");
-    scoreItem.setAttribute("id", "scores-list");
-    scoreItem.innerHTML =
-      currentHighScores[i].name +
-      ", " +
-      currentHighScores[i].score +
-      ", " +
-      currentHighScores[i].timeLeft;
-    highScoresList.appendChild(scoreItem);
+    //   for loop to display each object in currentHighScores in the existing ordered list in the HTML
+    for (let i = 0; i < currentHighScores.length; i++) {
+      let scoreItem = document.createElement("li");
+      scoreItem.setAttribute("id", "scores-list");
+      scoreItem.style.color = "green";
+      scoreItem.classList.add("highScoreText")
+      scoreItem.innerHTML =
+        "<span class='bold spacerR'>Player Name:</span>" +
+        currentHighScores[i].name +
+        "<span class='bold spacerR spacerL'>Number Correct:</span>" +
+        currentHighScores[i].score +
+        "<span class='bold spacerR spacerL'>Time Left:</span>" +
+        currentHighScores[i].timeLeft;
+      highScoresList.appendChild(scoreItem);
+    }
   }
 };
 
 const showQuestion = () => {
-  let { N, Q, A, C } = questions[qI]; //destructuring questions array
-  questionTitle.innerHTML = `<h1>${N}</h1>`;
-  questionText.innerHTML = `<h2>${Q}</h2>`;
+  let { qNumber, qText, qAnswerChoices, qCorrectChoice } =
+    questions[questionIndex]; //destructuring questions array
+  questionTitle.innerHTML = `<h1>${qNumber}</h1>`;
+  questionText.innerHTML = `<h2>${qText}</h2>`;
   answerChoices.innerHTML = "";
-  A.forEach((answer) => {
-    answerChoices.innerHTML += `<button class="btn" onclick="handleAnswer('${C}','${answer}')">${answer}</button>`;
+  qAnswerChoices.forEach((answer) => {
+    answerChoices.innerHTML += `<button class="btn" onclick="handleAnswer('${qCorrectChoice}','${answer}')">${answer}</button>`;
   });
 };
 
@@ -145,17 +145,18 @@ const takeQuiz = () => {
 const restart = () => {
   restartBtn.style.display = "none";
   questionArea.style.display = "none";
+  highScoresArea.style.display = "none";
   message.style.display = "none";
   scoreBox.style.display = "none";
+  answerChoices.style.display = "none";
   takeQuizBtn.style.display = "inline";
   info.style.display = "inline";
-  answerChoices.style.display = "none";
   timerBox.style.display = "block";
   highScoresBox.style.display = "block";
   timeLeft = 60;
   quizRun = true;
   clockId;
-  qI = 0;
+  questionIndex = 0;
   score = 0;
   quizDone = false;
   document.querySelector(".timer-count").innerHTML = timeLeft;
