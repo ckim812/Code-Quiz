@@ -58,7 +58,7 @@ const handleAnswer = (correct, choice) => {
   if (questionIndex < questions.length) showQuestion();
   if (questionIndex == questions.length) {
     quizDone = true;
-        document.querySelector("#user-score").innerHTML = score;
+    document.querySelector("#user-score").innerHTML = score;
     player = prompt("Please enter your name or initials:");
     const highScore = { name: player, score: score, timeLeft: timeLeft };
     displayHighScores(highScore);
@@ -107,7 +107,7 @@ const displayHighScores = (playerScore) => {
       let scoreItem = document.createElement("li");
       scoreItem.setAttribute("id", "scores-list");
       scoreItem.style.color = "green";
-      scoreItem.classList.add("highScoreText")
+      scoreItem.classList.add("highScoreText");
       scoreItem.innerHTML =
         "<span class='bold spacerR'>Player Name:</span>" +
         currentHighScores[i].name +
