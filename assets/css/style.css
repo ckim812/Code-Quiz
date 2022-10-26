@@ -62,7 +62,6 @@ footer {
   background: white;
   margin: 60px;
   border-radius: 8px;
-    border: 5px solid dimgray;
 }
 
 .timer-box {
@@ -154,5 +153,5 @@ footer {
   padding: 0 35px;
   font-size: 18px;
   font-weight: 500;
-  background-color:aliceblue;
+  background-color: aliceblue;
 }
